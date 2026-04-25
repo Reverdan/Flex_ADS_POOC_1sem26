@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\rever\\documents\\github\\flex_ads_pooc_1sem26\\jogo\\jogo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\rever\\documents\\github\\flex_ads_pooc_1sem26\\jogo\\jogo\\jogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\jogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,6 +13,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\rever\\documents\\github\\flex_ads_pooc_1sem26\\jogo\\jogo\\jogador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\jogador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\rever\\documents\\github\\flex_ads_pooc_1sem26\\jogo\\jogo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,50 +26,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Jogo.cs",
               "DocumentMoniker": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Jogo.cs",
               "RelativeDocumentMoniker": "Jogo\\Jogo.cs",
               "ToolTip": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Jogo.cs",
               "RelativeToolTip": "Jogo\\Jogo.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAqwEwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAmwCoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-25T15:23:01.04Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Inimigo.cs",
               "DocumentMoniker": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Inimigo.cs",
               "RelativeDocumentMoniker": "Jogo\\Inimigo.cs",
               "ToolTip": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Inimigo.cs",
               "RelativeToolTip": "Jogo\\Inimigo.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswB8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-25T15:22:17.35Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Jogador.cs",
               "DocumentMoniker": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Jogador.cs",
               "RelativeDocumentMoniker": "Jogo\\Jogador.cs",
               "ToolTip": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Jogador.cs",
               "RelativeToolTip": "Jogo\\Jogador.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-25T15:21:14.767Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Rever\\Documents\\GitHub\\Flex_ADS_POOC_1sem26\\Jogo\\Jogo\\Program.cs",
               "RelativeDocumentMoniker": "Jogo\\Program.cs",
