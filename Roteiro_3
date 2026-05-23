@@ -1,0 +1,275 @@
+Siga esta sequência para reduzir erros: 
+
+1. Crie o projeto Console e teste um “Olá, mundo” para validar o ambiente. 
+
+2. Crie a classe Jogador com as propriedades e o construtor. 
+
+3. Implemente ReceberDano no jogador e teste com um valor fixo (sem batalha ainda). 
+
+4. Implemente GanharPontos e teste somando pontos. 
+
+5. Crie a classe Inimigo com propriedades, construtor e ReceberDano. 
+
+6. Implemente Atacar em Jogador e em Inimigo: 
+
+ comece com as mensagens e as validações; 
+
+ depois, faça a chamada ao método ReceberDano do alvo. 
+
+7. Crie a classe Jogo e implemente Executar() até a parte de criar objetos e imprimir 
+
+estados. 
+
+8. Implemente Batalhar(...) com o laço while e as pausas por ENTER. 
+
+9. Conecte tudo a partir de Main() e faça a execução completa. 
+
+10. Faça um ajuste final nos textos e nos comentários, mantendo o console legível. 
+
+CHECKLIST DE COMPILAÇÃO E EXECUÇÃO 
+
+Antes de entregar, verifique: 
+
+ o código compila sem erros; 
+
+ o Main() chama Executar() corretamente; 
+
+ o Batalhar(...) termina quando alguém chega à Vida == 0; 
+
+ a vida nunca fica negativa; 
+
+ o jogador ganha pontos somente quando derrota o inimigo; 
+
+ a segunda batalha só começa se o jogador estiver vivo. 
+
+EXTENSÕES (OPCIONAIS, PARA NOTA DE CRIATIVIDADE) 
+
+Escolha uma ou mais melhorias, mantendo o programa funcional: 
+
+ a adição de um terceiro inimigo; 
+
+ a criação de um “ataque crítico” com chance aleatória e dano maior; 
+
+ a inclusão de um item de cura com uso limitado; 
+
+ a alteração do ritmo do jogo (por exemplo, mostrar um resumo do turno antes do 
+
+ENTER); 
+
+ a separação de responsabilidades (por exemplo, métodos menores para imprimir 
+
+status). 
+
+ 
+
+Esta é uma excelente estrutura de desenvolvimento em camadas. Seguir esse "passo a passo" é a melhor forma de evitar que erros simples de lógica se acumulem. Como você já domina os fundamentos de C# 14 e lógica de programação, vamos aplicar uma abordagem Orientada a Objetos robusta. 
+
+Aqui está a implementação completa, seguindo rigorosamente a sua sequência e incluindo a extensão de Ataque Crítico e Separação de Responsabilidades para maior clareza. 
+
+C# 
+
+ 
+
+using System; 
+ 
+
+// Passo 9: Conexão a partir do Main 
+var jogo = new Jogo(); 
+jogo.Executar(); 
+ 
+
+// --- Classes do Domínio --- 
+ 
+
+// Passo 2: Classe Jogador 
+public class Jogador 
+{ 
+    public string Nome { get; init; } 
+    public int Vida { get; private set; } 
+    public int Pontos { get; private set; } 
+    private Random _random = new Random(); 
+ 
+
+public Jogador(string nome, int vidaInicial) 
+    { 
+        Nome = nome; 
+        Vida = vidaInicial; 
+        Pontos = 0; 
+    } 
+ 
+
+// Passo 3 e Checklist: Vida nunca fica negativa 
+    public void ReceberDano(int dano) 
+    { 
+        Vida = Math.Max(0, Vida - dano); 
+        Console.WriteLine($"{Nome} recebeu {dano} de dano! Vida restante: {Vida}"); 
+    } 
+ 
+
+// Passo 4: Ganhar Pontos 
+    public void GanharPontos(int quantidade) 
+    { 
+        Pontos += quantidade; 
+        Console.WriteLine($"{Nome} ganhou {quantidade} pontos! Total: {Pontos}"); 
+    } 
+ 
+
+// Passo 6: Implementar Atacar com Extensão (Crítico) 
+    public void Atacar(Inimigo alvo) 
+    { 
+        if (Vida <= 0) return; 
+ 
+
+int danoBase = 20; 
+        bool eCritico = _random.Next(1, 101) <= 20; // 20% de chance 
+        int danoFinal = eCritico ? danoBase * 2 : danoBase; 
+ 
+
+if (eCritico) Console.WriteLine("!!! ATAQUE CRÍTICO !!!"); 
+         
+        Console.WriteLine($"{Nome} ataca {alvo.Nome}!"); 
+        alvo.ReceberDano(danoFinal); 
+    } 
+} 
+ 
+
+// Passo 5: Classe Inimigo 
+public class Inimigo 
+{ 
+    public string Nome { get; init; } 
+    public int Vida { get; private set; } 
+    public int Recompensa { get; init; } 
+ 
+
+public Inimigo(string nome, int vida, int recompensa) 
+    { 
+        Nome = nome; 
+        Vida = vida; 
+        Recompensa = recompensa; 
+    } 
+ 
+
+public void ReceberDano(int dano) 
+    { 
+        Vida = Math.Max(0, Vida - dano); 
+        Console.WriteLine($"{Nome} recebeu {dano} de dano! Vida de {Nome}: {Vida}"); 
+    } 
+ 
+
+public void Atacar(Jogador alvo) 
+    { 
+        if (Vida <= 0) return; 
+         
+        int dano = 15; 
+        Console.WriteLine($"{Nome} avança contra {alvo.Nome}!"); 
+        alvo.ReceberDano(dano); 
+    } 
+} 
+ 
+
+// --- Motor do Jogo --- 
+ 
+
+// Passo 7: Classe Jogo 
+public class Jogo 
+{ 
+    private Jogador? _jogador; 
+ 
+
+public void Executar() 
+    { 
+        // Passo 1: Validar ambiente 
+        Console.WriteLine("=== RPG CONSOLE: INICIALIZANDO INTERFACE ===\n"); 
+ 
+
+_jogador = new Jogador("Guerreiro C#", 100); 
+         
+        // Passo 7 e 8: Criar inimigos e gerenciar batalhas 
+        var listaInimigos = new List<Inimigo>  
+        {  
+            new Inimigo("Orc", 50, 100), 
+            new Inimigo("Dragão", 80, 500)  
+        }; 
+ 
+
+foreach (var inimigo in listaInimigos) 
+        { 
+            // Checklist: Segunda batalha só começa se jogador vivo 
+            if (_jogador.Vida > 0) 
+            { 
+                Batalhar(_jogador, inimigo); 
+            } 
+        } 
+ 
+
+ExibirResumoFinal(); 
+    } 
+ 
+
+// Passo 8: Lógica de Batalha 
+    private void Batalhar(Jogador jogador, Inimigo inimigo) 
+    { 
+        Console.WriteLine($"\n--- NOVA BATALHA: {jogador.Nome} vs {inimigo.Nome} ---"); 
+         
+        // Checklist: Termina quando alguém chega a 0 
+        while (jogador.Vida > 0 && inimigo.Vida > 0) 
+        { 
+            ExibirStatus(jogador, inimigo); 
+             
+            jogador.Atacar(inimigo); 
+             
+            if (inimigo.Vida > 0) 
+            { 
+                inimigo.Atacar(jogador); 
+            } 
+ 
+
+Console.WriteLine("\nPressione ENTER para o próximo turno..."); 
+            Console.ReadLine(); 
+        } 
+ 
+
+if (jogador.Vida > 0) 
+        { 
+            Console.WriteLine($"\nVITÓRIA! {inimigo.Nome} foi derrotado."); 
+            // Checklist: Ganha pontos somente ao derrotar 
+            jogador.GanharPontos(inimigo.Recompensa); 
+        } 
+        else 
+        { 
+            Console.WriteLine($"\nDERROTA... {jogador.Nome} caiu em combate."); 
+        } 
+    } 
+ 
+
+// Extensão: Separação de responsabilidades (Métodos de UI) 
+    private void ExibirStatus(Jogador j, Inimigo i) 
+    { 
+        Console.WriteLine($"\n[STATUS] {j.Nome}: {j.Vida} HP | {i.Nome}: {i.Vida} HP"); 
+        Console.WriteLine(new string('-', 30)); 
+    } 
+ 
+
+private void ExibirResumoFinal() 
+    { 
+        Console.WriteLine("\n" + new string('=', 40)); 
+        Console.WriteLine("FIM DE JOGO"); 
+        Console.WriteLine($"Pontuação Final: {_jogador?.Pontos}"); 
+        Console.WriteLine(new string('=', 40)); 
+        Console.WriteLine("Pressione ENTER para fechar."); 
+        Console.ReadLine(); 
+    } 
+} 
+ 
+
+O que foi aplicado deste roteiro: 
+
+Encapsulamento: Propriedades como Vida têm private set, garantindo que apenas os métodos ReceberDano possam alterá-las, respeitando a regra de nunca ser menor que zero (Math.Max). 
+
+Segurança de Tipos: O uso de Jogador? lida com a possível nulidade antes da inicialização. 
+
+Extensão de Criatividade: * Ataque Crítico: Implementado no método Atacar do Jogador com uso de Random. 
+
+Separação de Responsabilidades: Criados métodos privados ExibirStatus e ExibirResumoFinal para limpar o método Batalhar. 
+
+Ritmo de Jogo: Cada turno exige um ReadLine(), permitindo que o usuário acompanhe o log de combate. 
