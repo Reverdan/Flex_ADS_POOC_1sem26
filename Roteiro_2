@@ -1,0 +1,740 @@
+Etapa 1 — Mensagens iniciais no console 
+
+1. Imprimir um título (por exemplo: “demonstração de condicionais e laços”). 
+
+2. Imprimir uma linha em branco para organizar a saída. 
+
+Verificação: o console deve mostrar um cabeçalho legível. 
+
+ 
+
+Aqui está a implementação da sua Etapa 1: 
+
+C# 
+
+ 
+
+// 1. Imprimindo um título claro para a demonstração 
+Console.WriteLine("=== DEMONSTRAÇÃO DE CONDICIONAIS E LAÇOS ==="); 
+ 
+
+// 2. Imprimindo uma linha em branco para organizar a saída 
+// Você pode usar Console.WriteLine() vazio ou incluir um \n no final da string anterior 
+Console.WriteLine(); 
+ 
+
+// Checkpoint: O console deve exibir o título e um espaço antes do próximo conteúdo. 
+ 
+
+Dica de Organização: 
+
+Se você quiser deixar seus títulos ainda mais destacados sem escrever muitas linhas, pode usar caracteres de escape ou formatação simples: 
+
+\n: Pula uma linha dentro da própria string. 
+
+\t: Insere um tab (recuo). 
+
+ 
+ 
+
+Verificação: O console exibiu o cabeçalho com o espaçamento correto? 
+
+ 
+
+ 
+
+Etapa 2 — Identificadores case-sensitive 
+
+1. Declarar duas variáveis inteiras com nomes que diferem apenas por maiúsculas/ 
+
+minúsculas (por exemplo, aluno e Aluno). 
+
+2. Atribuir valores diferentes a cada uma (por exemplo, 10 e 20). 
+
+3. Imprimir os dois valores, deixando claro qual nome corresponde a qual valor. 
+
+Verificação: o console deve exibir dois números distintos, um para cada identificador. 
+
+ 
+
+Essa etapa é fundamental para entender como o compilador do C# enxerga o seu código. Diferente de algumas linguagens mais antigas ou de scripts de banco de dados (como SQL), o C# é estritamente case-sensitive. Isso significa que aluno, Aluno e ALUNO são três "caixas" de memória completamente diferentes. 
+
+Aqui está a implementação da Etapa 2: 
+
+C# 
+
+ 
+
+// 1. Declarando variáveis com nomes que diferem apenas por maiúsculas/minúsculas 
+int aluno = 10; 
+int Aluno = 20; 
+ 
+
+// 2. Atribuindo e imprimindo os valores para provar que são independentes 
+Console.WriteLine($"Valor da variável 'aluno' (minúsculo): {aluno}"); 
+Console.WriteLine($"Valor da variável 'Aluno' (Capitalizado): {Aluno}"); 
+ 
+
+// 3. Verificação de soma para reforçar a distinção 
+int soma = aluno + Aluno; 
+Console.WriteLine($"A soma das duas variáveis distintas é: {soma}"); 
+ 
+
+ 
+ 
+
+Por que isso é importante? 
+
+Padrões de Nomenclatura (Naming Conventions): No ecossistema .NET, seguimos o padrão PascalCase para nomes de classes e métodos (ex: CalcularTotal) e camelCase para variáveis locais e parâmetros (ex: valorTotal). 
+
+Evite Confusão: Embora o C# permita criar aluno e Aluno no mesmo escopo, na prática do dia a dia isso é considerado uma má prática, pois pode confundir você ou outros desenvolvedores durante a manutenção do código. 
+
+ 
+ 
+
+Verificação: O seu console deve exibir os números 10 e 20 separadamente. Se você tentasse usar uma variável que não foi exatamente declarada (ex: chamar ALUNO), o compilador acusaria um erro de "nome não encontrado". 
+
+ 
+
+Etapa 3 — Classificação por nota com if / else if / else 
+
+1. Declarar uma variável nota do tipo int. 
+
+2. Imprimir o valor da nota antes da classificação. 
+
+3. Implementar uma cadeia de condições com faixas, por exemplo: 
+
+ abaixo de 50 
+
+ abaixo de 70 
+
+ abaixo de 90 
+
+ caso contrário (a faixa final) 
+
+4. Em cada bloco, imprimir uma mensagem correspondente ao desempenho. 
+
+Testes obrigatórios: executar o programa várias vezes alterando a nota (por exemplo, 
+
+40, 60, 75 e 95) e registrar no relatório o que mudou. 
+
+Verificação: somente uma mensagem de resultado deve aparecer por execução. 
+
+ 
+
+ 
+
+Esta etapa é o coração da lógica de programação. O if / else if / else permite que o seu programa tome caminhos diferentes baseando-se em condições exclusivas. No C#, assim que uma condição é atendida, o computador executa o bloco correspondente e ignora todos os outros que vêm abaixo. 
+
+Aqui está o código para a sua Etapa 3: 
+
+C# 
+
+ 
+
+// 1. Declarando a variável nota (Altere este valor para os seus testes!) 
+int nota = 75;  
+ 
+
+// 2. Imprimindo a nota antes da classificação 
+Console.WriteLine($"Nota do aluno: {nota}"); 
+ 
+
+// 3. Implementando a cadeia de condições (Cuidado com a ordem!) 
+if (nota < 50) 
+{ 
+    // 4. Blocos de impressão correspondentes 
+    Console.WriteLine("Desempenho: Insatisfatório (Reprovado)"); 
+} 
+else if (nota < 70) 
+{ 
+    Console.WriteLine("Desempenho: Regular"); 
+} 
+else if (nota < 90) 
+{ 
+    Console.WriteLine("Desempenho: Bom"); 
+} 
+else 
+{ 
+    // Caso contrário (Faixa final: 90 ou mais) 
+    Console.WriteLine("Desempenho: Excelente (Parabéns!)"); 
+} 
+ 
+
+ 
+ 
+
+Por que a ordem das condições importa? 
+
+Em uma estrutura de else if, a ordem deve ir do caso mais restrito para o mais abrangente (ou seguir uma sequência lógica como fizemos acima). 
+
+Se você testasse primeiro if (nota < 90) e a nota fosse 40, o programa entraria no primeiro bloco (pois 40 é menor que 90) e nunca chegaria na verificação de "Insatisfatório". Ao usar a sequência 50 -> 70 -> 90, garantimos que cada nota caia exatamente na sua "gaveta" correta. 
+
+ 
+ 
+
+Tabela de Testes Sugerida para seu Relatório: 
+
+Valor da Nota 
+
+Saída Esperada 
+
+O que mudou? 
+
+40 
+
+Insatisfatório 
+
+Caiu no primeiro if. 
+
+60 
+
+Regular 
+
+Falhou no primeiro, mas passou no else if < 70. 
+
+75 
+
+Bom 
+
+Falhou nos dois primeiros, passou no else if < 90. 
+
+95 
+
+Excelente 
+
+Falhou em todas as condições e caiu no else final. 
+
+Exportar para as Planilhas 
+
+ 
+ 
+
+Verificação: Certifique-se de que apenas uma mensagem de desempenho apareça por vez. Se aparecerem duas, verifique se você não esqueceu o else antes do if. 
+
+ 
+
+Etapa 4 — Comando com switch 
+
+1. Declarar uma variável comando do tipo char. 
+
+2. Exibir no console qual comando foi escolhido. 
+
+3. Criar um switch com três casos (por exemplo, A, D, F) e um caso padrão (default). 
+
+4. Em cada caso, imprimir a ação correspondente e encerrar o caso com break. 
+
+Testes obrigatórios: executar com A, com D, com F e com um caractere diferente (por 
+
+exemplo, X) para confirmar o comportamento do default. 
+
+Verificação: a saída deve mudar de acordo com o comando e deve haver uma mensagem 
+
+específica no caso desconhecido. 
+
+ 
+
+O comando switch tradicional é ideal quando você tem uma variável que pode assumir vários valores específicos e discretos (como um caractere ou um número inteiro). Ele funciona como um "desvio ferroviário", direcionando a execução do código para o trilho correto com base no valor da variável. 
+
+Aqui está a implementação da Etapa 4: 
+
+C# 
+
+ 
+
+// 1. Declarando a variável comando do tipo char (use aspas simples '') 
+char comando = 'A';  
+ 
+
+// 2. Exibindo o comando escolhido 
+Console.WriteLine($"Comando selecionado: {comando}"); 
+ 
+
+// 3. Criando o switch com três casos e um padrão (default) 
+switch (comando) 
+{ 
+    case 'A': 
+        // 4. Ação correspondente e encerramento com break 
+        Console.WriteLine("Ação: Abrir arquivo."); 
+        break; 
+ 
+
+case 'D': 
+        Console.WriteLine("Ação: Deletar registro."); 
+        break; 
+ 
+
+case 'F': 
+        Console.WriteLine("Ação: Fechar aplicação."); 
+        break; 
+ 
+
+default: 
+        // Caso 'X' ou qualquer outro caractere não mapeado 
+        Console.WriteLine("Ação: Comando desconhecido ou inválido."); 
+        break; 
+} 
+ 
+
+ 
+ 
+
+Pontos Importantes sobre o switch: 
+
+O papel do break: Ele é obrigatório no C#. Sem ele, o código tentaria "escorregar" para o próximo caso, o que gera um erro de compilação. Ele sinaliza que a tarefa daquele bloco terminou. 
+
+O default: Funciona como uma rede de segurança. Se o usuário digitar algo que você não previu (como o 'X' dos seus testes), o programa não fica "mudo"; ele executa o que estiver aqui. 
+
+Char vs String: Lembre-se que char usa aspas simples ('A'), enquanto string usa aspas duplas ("A"). O switch diferencia os dois tipos. 
+
+ 
+ 
+
+Guia de Testes para seu Relatório: 
+
+Entrada (char) 
+
+Saída do Console 
+
+Comportamento Observado 
+
+'A' 
+
+Abrir arquivo. 
+
+Entrou no primeiro caso com sucesso. 
+
+'D' 
+
+Deletar registro. 
+
+Ignorou o 'A' e foi direto para o 'D'. 
+
+'F' 
+
+Fechar aplicação. 
+
+Acionou a funcionalidade de saída. 
+
+'X' 
+
+Comando desconhecido. 
+
+Como não havia case 'X', caiu no default. 
+
+Exportar para as Planilhas 
+
+ 
+ 
+
+Verificação: O console exibiu a mensagem do default corretamente ao testar com 'X'? 
+
+ 
+
+Etapa 5 — Contagem com o laço for 
+
+1. Antes do laço, imprimir uma frase explicando o que será feito (por exemplo, “contar 
+
+de 1 até 5”). 
+
+2. Criar um for que inicialize um contador em 1, avance até 5 e incremente de 1 em 1. 
+
+3. Dentro do laço, imprimir o valor atual do contador a cada repetição. 
+
+Verificação: devem aparecer cinco linhas, uma para cada valor de 1 a 5. 
+
+ 
+
+O laço for é a estrutura de repetição ideal quando você já sabe exatamente quantas vezes deseja executar um bloco de código. Ele concentra a inicialização, a condição de parada e o incremento em uma única linha, o que torna o código muito organizado. 
+
+Aqui está a implementação da sua Etapa 5: 
+
+C# 
+
+ 
+
+// 1. Frase explicativa antes do laço 
+Console.WriteLine("Iniciando a contagem de 1 até 5:"); 
+ 
+
+// 2. Criando o laço for 
+// int i = 1 (inicialização) 
+// i <= 5 (condição de permanência) 
+// i++ (incremento de 1 em 1) 
+for (int i = 1; i <= 5; i++) 
+{ 
+    // 3. Imprimindo o valor atual do contador 
+    Console.WriteLine($"Contagem atual: {i}"); 
+} 
+ 
+
+Console.WriteLine("Contagem finalizada!"); 
+ 
+
+ 
+ 
+
+Anatomia do Laço for 
+
+Para entender o que acontece em cada repetição, imagine o for dividido em três partes separadas por ponto e vírgula: 
+
+int i = 1: Executado apenas uma vez no início. Cria a variável controladora. 
+
+i <= 5: Verificado antes de cada volta. Se for falso, o laço acaba. 
+
+i++: Executado ao final de cada volta, preparando o valor para a próxima verificação. 
+
+ 
+ 
+
+Guia de Verificação: 
+
+Ao executar o código, o seu console deve apresentar exatamente esta estrutura: 
+
+Iniciando a contagem de 1 até 5: 
+
+Contagem atual: 1 
+
+Contagem atual: 2 
+
+Contagem atual: 3 
+
+Contagem atual: 4 
+
+Contagem atual: 5 
+
+Contagem finalizada! 
+
+ 
+
+Etapa 6 — Contagem regressiva com o laço while 
+
+1. Declarar uma variável contador (por exemplo, iniciando em 3). 
+
+2. Criar um while que execute enquanto o contador for maior que 0. 
+
+3. Dentro do laço: 
+
+ imprimir o valor do contador; 
+
+ decrementar o contador em 1. 
+
+4. Após o laço, imprimir uma mensagem de encerramento da contagem. 
+
+Testes obrigatórios: alterar o valor inicial (por exemplo, 5) e observar a diferença. 
+
+Verificação: a contagem deve parar no momento em que a condição deixar de ser 
+
+verdadeira. 
+
+ 
+
+O laço while é a escolha ideal quando o foco principal é a condição de permanência. Diferente do for, que geralmente lida com intervalos fixos, o while repete o bloco de código enquanto uma expressão booleana for verdadeira. É como um "enquanto isso for verdade, continue fazendo". 
+
+Aqui está a implementação da Etapa 6: 
+
+C# 
+
+ 
+
+// 1. Declarando a variável contador (Valor inicial) 
+int contador = 3;  
+ 
+
+Console.WriteLine($"Iniciando contagem regressiva a partir de {contador}..."); 
+ 
+
+// 2. Criando o laço while 
+// A condição "contador > 0" é verificada ANTES de cada execução 
+while (contador > 0) 
+{ 
+    // 3. Dentro do laço: imprimir e decrementar 
+    Console.WriteLine($"Valor atual: {contador}"); 
+     
+    // Decrementando o contador em 1 (equivalente a contador = contador - 1) 
+    contador--;  
+} 
+ 
+
+// 4. Mensagem de encerramento após o laço 
+Console.WriteLine("Fim da contagem! O alvo foi atingido."); 
+ 
+
+ 
+ 
+
+O que observar durante o while: 
+
+O Fluxo de Verificação: O C# olha para a condição contador > 0. Se for true, ele entra no bloco { }. Se for false (como quando o contador chega a 0), ele pula todo o bloco e vai direto para a mensagem de encerramento. 
+
+A Importância do Decremento (--): Se você esquecer de diminuir o valor do contador, a condição 3 > 0 será sempre verdadeira, criando o que chamamos de loop infinito, onde o programa nunca para de rodar. 
+
+ 
+ 
+
+Guia de Testes para seu Relatório: 
+
+Valor Inicial 
+
+Saída do Console 
+
+Verificação de Parada 
+
+3 
+
+3, 2, 1 
+
+Parou antes de imprimir o 0, pois 0 > 0 é falso. 
+
+5 
+
+5, 4, 3, 2, 1 
+
+O laço executou mais duas vezes antes de encerrar. 
+
+0 
+
+(Nenhuma contagem) 
+
+Como a condição já era falsa no início, o laço nem começou. 
+
+Exportar para as Planilhas 
+
+ 
+ 
+
+Verificação: O console exibiu a mensagem de encerramento imediatamente após o valor 1? Isso confirma que o 0 não satisfaz a condição de entrada. 
+
+ 
+
+ 
+
+Etapa 7 — Encerramento com pausa do console 
+
+1. Imprimir uma mensagem pedindo para pressionar ENTER. 
+
+2. Ler uma linha do teclado para manter o console aberto. 
+
+Verificação: o programa deve esperar a tecla ENTER antes de finalizar. 
+
+ 
+
+Esta é a etapa final essencial para garantir que o usuário consiga ler todos os resultados dos testes anteriores antes que a janela do terminal se feche automaticamente (comportamento comum ao executar o programa sem o modo de depuração). 
+
+Aqui está a implementação da Etapa 7: 
+
+C# 
+
+ 
+
+// 1. Mensagem de instrução para o usuário 
+Console.WriteLine("\n--- FIM DA DEMONSTRAÇÃO ---"); 
+Console.Write("Pressione a tecla [ENTER] para sair e fechar esta janela..."); 
+ 
+
+// 2. Lendo a entrada do teclado 
+// O programa ficará "pausado" nesta linha até que o ENTER seja detectado 
+Console.ReadLine(); 
+ 
+
+// Checkpoint: O console deve permanecer estático até que você interaja com ele. 
+ 
+
+ 
+ 
+
+Por que o Console.ReadLine() é usado aqui? 
+
+O método ReadLine() foi projetado para capturar uma linha inteira de texto digitada pelo usuário. Quando o usamos no final do programa sem atribuir o resultado a nenhuma variável, estamos tecnicamente "jogando fora" o que foi digitado, usando a função apenas pelo seu efeito colateral: interromper a execução do fluxo até que uma entrada ocorra. 
+
+Resumo da sua Jornada de Lógica (Etapas 1 a 7) 
+
+Você construiu um script completo de fundamentos: 
+
+Organização: Cabeçalhos e espaçamento. 
+
+Sintaxe: Diferenciação entre maiúsculas e minúsculas (case-sensitive). 
+
+Decisão: Classificação de faixas com if/else if. 
+
+Seleção: Direcionamento de comandos com switch. 
+
+Repetição Controlada: Contagem progressiva com for. 
+
+Repetição Condicional: Contagem regressiva com while. 
+
+Interação Final: Pausa deliberada do sistema. 
+
+ 
+ 
+
+Verificação Final: Ao pressionar ENTER, a janela do console deve se fechar imediatamente. Se isso aconteceu, seu roteiro de testes foi concluído com sucesso! 
+
+ 
+
+EXTENSÕES (PARA A PARTE DE CRIATIVIDADE) 
+
+Escolher ao menos uma: 
+
+1. Ler a nota do teclado e validar a entrada (por exemplo, usando TryParse). 
+
+2. Ler o comando do teclado, aceitando letras minúsculas e convertendo para maiúsculas 
+
+antes do switch. 
+
+3. Transformar o programa em POO, criando uma classe (por exemplo, 
+
+DemonstradorDeFluxo) com métodos como: 
+
+ um método para mostrar o exemplo de case-sensitive; 
+
+ um método para classificar a nota; 
+
+ um método para processar o comando; 
+
+ um método para o for; 
+
+ um método para o while. 
+
+4. Criar um menu com repetição, usando um laço para permitir que o usuário execute 
+
+cada parte (nota, comando, contagens) sem reiniciar o programa. 
+
+ 
+
+Essa é a melhor forma de consolidar tudo o que você praticou até agora! Ao escolher a Extensão 3 (Transformar em POO) combinada com a Extensão 4 (Criar um menu com repetição), você eleva o código de um simples script para uma aplicação estruturada. 
+
+Aqui está uma implementação que une essas ideias, utilizando os conceitos modernos que vimos (como File-scoped namespaces e Switch expressions): 
+
+C# 
+
+ 
+
+using System; 
+ 
+
+// Instanciando a classe e iniciando o menu 
+var demo = new DemonstradorDeFluxo(); 
+demo.ExecutarMenu(); 
+ 
+
+public class DemonstradorDeFluxo 
+{ 
+    public void ExecutarMenu() 
+    { 
+        string? opcao = ""; 
+        while (opcao != "0") 
+        { 
+            Console.Clear(); 
+            Console.WriteLine("=== MENU DE DEMONSTRAÇÃO C# ==="); 
+            Console.WriteLine("1. Testar Case-Sensitivity"); 
+            Console.WriteLine("2. Classificar Nota (if/else)"); 
+            Console.WriteLine("3. Processar Comando (switch)"); 
+            Console.WriteLine("4. Contagem Progressiva (for)"); 
+            Console.WriteLine("5. Contagem Regressiva (while)"); 
+            Console.WriteLine("0. Sair"); 
+            Console.Write("\nEscolha uma opção: "); 
+             
+            opcao = Console.ReadLine(); 
+ 
+
+// Processando a escolha do menu 
+            switch (opcao) 
+            { 
+                case "1": ExemploCaseSensitive(); break; 
+                case "2": ClassificarNota(); break; 
+                case "3": ProcessarComando(); break; 
+                case "4": ExecutarFor(); break; 
+                case "5": ExecutarWhile(); break; 
+                case "0": Console.WriteLine("Saindo..."); break; 
+                default: Console.WriteLine("Opção inválida!"); break; 
+            } 
+ 
+
+if (opcao != "0") 
+            { 
+                Console.WriteLine("\nPressione ENTER para voltar ao menu..."); 
+                Console.ReadLine(); 
+            } 
+        } 
+    } 
+ 
+
+private void ExemploCaseSensitive() 
+    { 
+        int valor = 10; 
+        int Valor = 20; 
+        Console.WriteLine($"valor (minúsculo): {valor}"); 
+        Console.WriteLine($"Valor (maiúsculo): {Valor}"); 
+    } 
+ 
+
+private void ClassificarNota() 
+    { 
+        Console.Write("Digite a nota (0-100): "); 
+        // Extensão 1: Validação com TryParse 
+        if (int.TryParse(Console.ReadLine(), out int nota)) 
+        { 
+            string resultado = nota switch 
+            { 
+                < 50 => "Insatisfatório", 
+                < 70 => "Regular", 
+                < 90 => "Bom", 
+                _    => "Excelente" 
+            }; 
+            Console.WriteLine($"Desempenho: {resultado}"); 
+        } 
+        else 
+        { 
+            Console.WriteLine("Entrada inválida! Digite um número inteiro."); 
+        } 
+    } 
+ 
+
+private void ProcessarComando() 
+    { 
+        Console.Write("Digite um comando (A, D, F): "); 
+        string entrada = Console.ReadLine() ?? ""; 
+         
+        // Extensão 2: Convertendo para maiúsculas (ToUpper) 
+        char comando = entrada.Length > 0 ? char.ToUpper(entrada[0]) : ' '; 
+ 
+
+switch (comando) 
+        { 
+            case 'A': Console.WriteLine("Ação: Abrir"); break; 
+            case 'D': Console.WriteLine("Ação: Deletar"); break; 
+            case 'F': Console.WriteLine("Ação: Fechar"); break; 
+            default: Console.WriteLine("Comando desconhecido."); break; 
+        } 
+    } 
+ 
+
+private void ExecutarFor() 
+    { 
+        for (int i = 1; i <= 5; i++) Console.WriteLine($"For: {i}"); 
+    } 
+ 
+
+private void ExecutarWhile() 
+    { 
+        int c = 3; 
+        while (c > 0) Console.WriteLine($"While: {c--}"); 
+    } 
+} 
+ 
+
+Por que essa estrutura é superior? 
+
+Encapsulamento: Cada funcionalidade está "guardada" em seu próprio método. Se você precisar mudar a lógica da nota, não corre o risco de quebrar o laço for. 
+
+Reutilização: O menu permite que você teste o mesmo código várias vezes com entradas diferentes (como notas 40, 70, 95) sem ter que recompilar o projeto a cada vez. 
+
+Robustez (TryParse): O uso do int.TryParse evita que o programa "crashe" caso o usuário digite uma letra onde se espera um número. 
+
+ 
+ 
+
+Verificação da Extensão: * Ao digitar uma nota como "abc", o programa exibe o erro amigável em vez de fechar? 
+
+Ao digitar 'a' minúsculo no comando, ele reconhece como 'A' e executa a ação? 
