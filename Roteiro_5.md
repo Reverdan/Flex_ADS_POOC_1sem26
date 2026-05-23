@@ -1,3 +1,5 @@
+# Roteiro 5
+
 PARTE A - CONFIGURAÇÃO DO PROJETO NO VISUAL STUDIO 
 
 1. criar um novo projeto do tipo Console App (aplicação de console); 
@@ -177,7 +179,7 @@ public class Gato : Animal
     public Gato(string nome) : base(nome) { } 
  
 
-public override void Emit herSom() 
+public override void EmitirSom() 
     { 
         Console.WriteLine($"[Gato] {Nome} diz: Miau! 🐱"); 
     } 
@@ -282,4 +284,4 @@ Checklist de Conclusão
 
 [x] O método EmitirSom usa override nas subclasses. 
 
-[x] A lista armazena diferentes tipos sob a mesma referência (Animal). 
+[x] A lista armazena diferentes tipos sob a mesma referência (Animal).

@@ -1,3 +1,5 @@
+# Roteiro 3
+
 Siga esta sequência para reduzir erros: 
 
 1. Crie o projeto Console e teste um “Olá, mundo” para validar o ambiente. 
@@ -272,4 +274,4 @@ Extensão de Criatividade: * Ataque Crítico: Implementado no método Atacar do 
 
 Separação de Responsabilidades: Criados métodos privados ExibirStatus e ExibirResumoFinal para limpar o método Batalhar. 
 
-Ritmo de Jogo: Cada turno exige um ReadLine(), permitindo que o usuário acompanhe o log de combate. 
+Ritmo de Jogo: Cada turno exige um ReadLine(), permitindo que o usuário acompanhe o log de combate.
