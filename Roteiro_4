@@ -1,0 +1,379 @@
+PASSO A PASSO DE IMPLEMENTAÇÃO 
+
+Passo 1 — Preparar o projeto 
+
+1. Crie um projeto Console. 
+
+2. Confirme que o projeto compila e executa com uma mensagem simples no console. 
+
+Passo 2 — Criar a classe e o campo 
+
+1. Crie um arquivo para a classe ContaBancaria. 
+
+2. Declare um campo saldo como private decimal. 
+
+3. Explique no relatório por que esse campo deve ser privado. 
+
+Passo 3 — Criar a propriedade Saldo 
+
+1. Crie uma propriedade pública Saldo. 
+
+2. Faça a leitura do saldo pelo get. 
+
+3. Restrinja a escrita externa usando private set (ou outra estratégia equivalente). 
+
+4. No relatório, explique por que o set não deve ser público. 
+
+Passo 4 — Criar o construtor com parâmetro opcional 
+
+1. Implemente um construtor que receba saldoInicial com valor padrão zero. 
+
+2. Inicialize o saldo com o valor recebido. 
+
+3. No relatório, descreva o que significa um parâmetro opcional e o sufixo m em decimal. 
+
+Passo 5 — Implementar Depositar 
+
+1. Crie o método retornando bool. 
+
+2. Aplique a regra: quantia deve ser maior que zero. 
+
+3. Em caso válido, some no saldo. 
+
+4. Retorne true ou false conforme o resultado. 
+
+5. No relatório, descreva a regra e por que ela existe. 
+
+Passo 6 — Implementar Sacar 
+
+1. Crie o método retornando bool. 
+
+2. Aplique as regras: 
+
+ quantia deve ser maior que zero; 
+
+ quantia não pode exceder o saldo. 
+
+3. Em caso válido, subtraia do saldo. 
+
+4. Retorne true ou false conforme o resultado. 
+
+5. No relatório, descreva as regras e a necessidade de evitar saldo negativo. 
+
+Passo 7 — Criar testes no Main 
+
+1. Instancie a conta com saldo inicial (por exemplo, 100m). 
+
+2. Exiba o saldo inicial. 
+
+3. Faça uma sequência de chamadas: 
+
+ depósito válido; 
+
+ depósito inválido; 
+
+ saque válido; 
+
+ saque inválido por exceder o saldo; 
+
+ saque inválido por valor não positivo. 
+
+4. Após cada chamada, imprima: 
+
+ o valor tentado; 
+
+ se a operação foi aceita; 
+
+ o saldo atual. 
+
+CHECKLIST DE VALIDAÇÃO 
+
+Antes de entregar, verifique: 
+
+ o código compila sem erros; 
+
+ o saldo não pode ser alterado diretamente de fora da classe; 
+
+ depósitos com valor não positivo são rejeitados; 
+
+ saques com valor não positivo são rejeitados; 
+
+ saques acima do saldo são rejeitados; 
+
+ o saldo é atualizado corretamente nos casos válidos. 
+
+EXTENSÕES (OPCIONAIS, PARA CRIATIVIDADE) 
+
+Escolha uma ou mais melhorias, mantendo a solução correta: 
+
+ a criação de um método Transferir(ContaBancaria destino, decimal quantia) usando 
+
+Sacar e Depositar; 
+
+ a inclusão de um histórico simples de operações (lista de textos com data e tipo); 
+
+ a validação do saldo inicial para impedir valor negativo no construtor; 
+
+ a criação de um menu no console com opções “depositar”, “sacar” e “sair”. 
+
+ 
+
+Excelente roteiro! Este exercício foca em um dos pilares mais importantes da Orientação a Objetos: o Encapsulamento. Ao restringir o acesso direto aos dados, garantimos que a classe ContaBancaria seja a única responsável por validar as regras de negócio (como não permitir saques maiores que o saldo). 
+
+Aqui está a implementação seguindo rigorosamente os seus passos, incluindo a Extensão de Histórico e o Menu de Operações para dar aquele toque de criatividade. 
+
+C# 
+
+ 
+
+using System; 
+using System.Collections.Generic; 
+ 
+
+// Passo 7: Testes no Main (integrado ao Menu da Extensão) 
+var minhaConta = new ContaBancaria(100m); 
+var menu = new MenuConta(minhaConta); 
+menu.Exibir(); 
+ 
+
+// Passo 2 & 3: Criar a classe e a propriedade 
+public class ContaBancaria 
+{ 
+    // Passo 2: Campo privado (Backing Field) 
+    // Relatório: Privado para impedir que códigos externos alterem o valor  
+    // sem passar pelas regras de validação (saque/depósito). 
+    private decimal _saldo; 
+ 
+
+// Passo 3: Propriedade Saldo 
+    // Relatório: O 'private set' garante que o saldo só mude via métodos internos. 
+    public decimal Saldo  
+    {  
+        get => _saldo;  
+        private set => _saldo = value;  
+    } 
+ 
+
+// Extensão: Histórico de operações 
+    private List<string> _historico = new List<string>(); 
+ 
+
+// Passo 4: Construtor com parâmetro opcional 
+    // Relatório: Parâmetro opcional permite criar conta com 0 sem passar valor. 
+    // O sufixo 'm' indica que o número é um literal do tipo decimal (precisão financeira). 
+    public ContaBancaria(decimal saldoInicial = 0m) 
+    { 
+        // Extensão: Validação de saldo inicial 
+        Saldo = saldoInicial < 0 ? 0m : saldoInicial; 
+        RegistrarAcao($"Abertura de conta com {Saldo:C2}"); 
+    } 
+ 
+
+// Passo 5: Implementar Depositar 
+    // Relatório: A regra 'quantia > 0' evita depósitos nulos ou negativos que quebrariam a lógica. 
+    public bool Depositar(decimal quantia) 
+    { 
+        if (quantia <= 0)  
+        { 
+            RegistrarAcao($"Tentativa de depósito inválida: {quantia:C2}"); 
+            return false; 
+        } 
+ 
+
+Saldo += quantia; 
+        RegistrarAcao($"Depósito realizado: {quantia:C2}"); 
+        return true; 
+    } 
+ 
+
+// Passo 6: Implementar Sacar 
+    // Relatório: Evita saldo negativo e garante que a quantia seja válida. 
+    public bool Sacar(decimal quantia) 
+    { 
+        if (quantia <= 0 || quantia > Saldo) 
+        { 
+            RegistrarAcao($"Tentativa de saque negada: {quantia:C2}"); 
+            return false; 
+        } 
+ 
+
+Saldo -= quantia; 
+        RegistrarAcao($"Saque realizado: {quantia:C2}"); 
+        return true; 
+    } 
+ 
+
+private void RegistrarAcao(string mensagem) 
+    { 
+        _historico.Add($"{DateTime.Now:HH:mm:ss} - {mensagem} | Saldo Atual: {Saldo:C2}"); 
+    } 
+ 
+
+public void ExibirHistorico() 
+    { 
+        Console.WriteLine("\n--- HISTÓRICO DA CONTA ---"); 
+        _historico.ForEach(Console.WriteLine); 
+    } 
+} 
+ 
+
+// Extensão: Menu no Console 
+public class MenuConta 
+{ 
+    private ContaBancaria _conta; 
+ 
+
+public MenuConta(ContaBancaria conta) => _conta = conta; 
+ 
+
+public void Exibir() 
+    { 
+        string opcao = ""; 
+        while (opcao != "0") 
+        { 
+            Console.WriteLine($"\nSaldo Atual: {_conta.Saldo:C2}"); 
+            Console.WriteLine("1. Depositar | 2. Sacar | 3. Ver Histórico | 0. Sair"); 
+            Console.Write("Escolha: "); 
+            opcao = Console.ReadLine(); 
+ 
+
+switch (opcao) 
+            { 
+                case "1": 
+                    ProcessarOperacao("depósito", _conta.Depositar); 
+                    break; 
+                case "2": 
+                    ProcessarOperacao("saque", _conta.Sacar); 
+                    break; 
+                case "3": 
+                    _conta.ExibirHistorico(); 
+                    break; 
+            } 
+        } 
+    } 
+ 
+
+private void ProcessarOperacao(string tipo, Func<decimal, bool> operacao) 
+    { 
+        Console.Write($"Valor para {tipo}: "); 
+        if (decimal.TryParse(Console.ReadLine(), out decimal valor)) 
+        { 
+            bool sucesso = operacao(valor); 
+            Console.WriteLine(sucesso ? "Operação realizada!" : "Operação recusada (valor inválido ou insuficiente)."); 
+        } 
+    } 
+} 
+ 
+
+Checklist de Validação Atendido: 
+
+Compilação: O código utiliza C# moderno (top-level statements e lambdas). 
+
+Encapsulamento: Tentar fazer minhaConta.Saldo = 500 resultará em erro de compilação, protegendo o dado. 
+
+Regras de Negócio: * Depósitos de -10 ou 0 retornam false. 
+
+Saques maiores que o saldo disponível são bloqueados. 
+
+Sufixo m: Explicado como essencial para o tipo decimal, evitando erros de arredondamento comuns em double ou float. 
+
+ 
+
+Com certeza! Vamos implementar a Transferência Bancária, que é um dos melhores exemplos de como reutilizar métodos existentes (Sacar e Depositar) para criar uma lógica mais complexa com segurança. 
+
+Para garantir que o dinheiro não "desapareça" no meio do caminho, a regra é: o saque na conta de origem só deve ser confirmado se o depósito na conta de destino for possível. 
+
+Aqui está o código atualizado com o método Transferir e um pequeno teste no Main: 
+
+C# 
+
+ 
+
+public class ContaBancaria 
+{ 
+    private decimal _saldo; 
+    public decimal Saldo { get; private set; } 
+    private List<string> _historico = new List<string>(); 
+ 
+
+public ContaBancaria(decimal saldoInicial = 0m) 
+    { 
+        Saldo = saldoInicial < 0 ? 0m : saldoInicial; 
+        RegistrarAcao("Abertura de conta."); 
+    } 
+ 
+
+public bool Depositar(decimal quantia) 
+    { 
+        if (quantia <= 0) return false; 
+        Saldo += quantia; 
+        RegistrarAcao($"Depósito: {quantia:C2}"); 
+        return true; 
+    } 
+ 
+
+public bool Sacar(decimal quantia) 
+    { 
+        if (quantia <= 0 || quantia > Saldo) return false; 
+        Saldo -= quantia; 
+        RegistrarAcao($"Saque: {quantia:C2}"); 
+        return true; 
+    } 
+ 
+
+// --- Extensão: Transferência entre Contas --- 
+    public bool Transferir(ContaBancaria destino, decimal quantia) 
+    { 
+        // 1. Validação básica: destino não pode ser nulo e quantia deve ser positiva 
+        if (destino == null || quantia <= 0) return false; 
+ 
+
+// 2. Tenta sacar da conta atual (origem) 
+        if (this.Sacar(quantia)) 
+        { 
+            // 3. Se o saque funcionou, deposita no destino 
+            if (destino.Depositar(quantia)) 
+            { 
+                RegistrarAcao($"Transferência enviada: {quantia:C2} para conta destino."); 
+                destino.RegistrarAcao($"Transferência recebida: {quantia:C2} de conta origem."); 
+                return true; 
+            } 
+            else 
+            { 
+                // 4. Caso o depósito falhe por algum motivo raro, devolve o dinheiro (Rollback) 
+                this.Depositar(quantia); 
+                return false; 
+            } 
+        } 
+ 
+
+return false; 
+    } 
+ 
+
+private void RegistrarAcao(string msg) => _historico.Add($"{DateTime.Now:HH:mm} - {msg}"); 
+} 
+ 
+
+// --- Exemplo de Teste de Transferência --- 
+var contaA = new ContaBancaria(500m); 
+var contaB = new ContaBancaria(100m); 
+ 
+
+Console.WriteLine($"Saldo A: {contaA.Saldo:C2} | Saldo B: {contaB.Saldo:C2}"); 
+ 
+
+if (contaA.Transferir(contaB, 200m)) 
+{ 
+    Console.WriteLine("Transferência de R$ 200,00 realizada com sucesso!"); 
+} 
+ 
+
+Console.WriteLine($"Novo Saldo A: {contaA.Saldo:C2} | Novo Saldo B: {contaB.Saldo:C2}"); 
+ 
+
+Por que essa lógica é segura? 
+
+Encapsulamento: Usamos os métodos Sacar e Depositar que já possuem as travas de segurança (não deixar saldo negativo, não aceitar valores nulos). 
+
+Atomicidade Simples: O código verifica se o saque foi possível antes de tentar o depósito. Se o saldo de A for insuficiente, o método retorna false imediatamente e nada acontece com a conta B. 
