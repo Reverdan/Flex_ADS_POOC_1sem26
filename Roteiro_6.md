@@ -1,317 +1,95 @@
-# Roteiro 6
-
-PARTE A - CONFIGURAÇÃO DO PROJETO NO VISUAL STUDIO 
-
-1. criar um novo projeto do tipo Console App (aplicação de console); 
-
-2. definir o nome da solução e do projeto (por exemplo, GeometriaPOO); 
-
-3. executar o projeto inicial para confirmar que o ambiente compila e roda. 
-
-PARTE B - IMPLEMENTAÇÃO PASSO A PASSO 
-
-1) Criar a interface IForma 
-
-Crie uma interface chamada IForma com: 
-
- um método CalcularArea() que retorne double; 
-
- um método CalcularPerimetro() que retorne double. 
-
-Checklist do item 1 
-
- a interface compila; 
-
- os métodos têm apenas a assinatura (sem corpo). 
-
-2) Criar a classe Retangulo que implementa IForma 
-
-Crie uma classe concreta Retangulo com: 
-
- a implementação de IForma; 
-
- duas propriedades públicas do tipo double: 
-
- Largura; 
-
- Altura; 
-
- um construtor que receba largura e altura e inicialize as propriedades; 
-
- a implementação de: 
-
- CalcularArea() usando a fórmula do retângulo; 
-
- CalcularPerimetro() usando a fórmula do retângulo. 
-
-Ponto de atenção 
-
- confirme no papel a fórmula de perímetro: ela deve considerar os dois pares de lados. 
-
-3) Criar a classe Circulo que implementa IForma 
-
-Crie uma classe concreta Circulo com: 
-
- a implementação de IForma; 
-
- uma propriedade pública do tipo double: 
-
- Raio; 
-
- um construtor que receba raio e inicialize a propriedade; 
-
- a implementação de: 
-
- CalcularArea() usando π e o raio ao quadrado; 
-
- CalcularPerimetro() (circunferência) usando π e o raio. 
-
-Dica técnica 
-
- use Math.PI como valor de π. 
-
-4) Criar a classe do aplicativo (por exemplo, GeometriaApp) com Main 
-
-No método Main: 
-
-1. crie uma lista do tipo List<IForma>; 
-
-2. adicione pelo menos: 
-
- um retângulo, com valores numéricos definidos por você; 
-
- um círculo, com valor numérico definido por você; 
-
-3. percorra a lista com um laço (foreach) e para cada item: 
-
- imprima a área chamando CalcularArea(); 
-
- imprima o perímetro chamando CalcularPerimetro(); 
-
- imprima um separador visual (por exemplo, uma linha de traços). 
-
-O que você deve observar 
-
- a variável do laço tem o tipo IForma, mas cada objeto pode ser de uma classe diferente; 
-
- as chamadas de método devem executar o cálculo correspondente ao tipo concreto 
-
-de cada forma. 
-
-PARTE C - COMPILAÇÃO, EXECUÇÃO E REGISTRO DO RESULTADO 
-
-1. compilar a solução; 
-
-2. executar o programa; 
-
-3. registrar no relatório: 
-
- o texto exibido no console (copiado e colado); 
-
- uma explicação curta mostrando onde aparece a interface e onde aparece o 
-
-polimorfismo. 
-
-PARTE D - EXTENSÕES (PARA CRIATIVIDADE E APRIMORAMENTOS) 
-
-Escolha pelo menos uma melhoria: 
-
-1. Adicionar uma terceira forma (por exemplo, Triangulo), com as propriedades e as 
-
-fórmulas corretas; 
-
-2. Ler dados do usuário com Console.ReadLine() e criar as formas a partir das entradas; 
-
-3. Validar as entradas (por exemplo, impedir valores negativos para largura, altura e 
-
-raio); 
-
-4. Formatar a saída (por exemplo, limitar casas decimais com formatação numérica). 
-
- 
-
-Essa trilha é perfeita para diferenciar Interfaces de Classes Abstratas. Enquanto a classe abstrata (que vimos com os Animais) define o que um objeto é, a Interface define o que um objeto é capaz de fazer. No seu caso, qualquer forma geométrica, não importa quão diferente seja, deve ser capaz de calcular sua área e seu perímetro. 
-
-Aqui está a implementação completa seguindo o roteiro, incluindo a Extensão de Formatação Numérica e Validação de Entradas. 
-
- 
- 
-
-Partes A e B - Estrutura de Geometria com Interfaces 
-
-C# 
-
- 
-
-using System; 
-using System.Collections.Generic; 
- 
-
-// --- PARTE B.1: A Interface --- 
-// Relatório: Interfaces não possuem campos ou lógica, apenas o "contrato" de métodos. 
-public interface IForma 
-{ 
-    double CalcularArea(); 
-    double CalcularPerimetro(); 
-} 
- 
-
-// --- PARTE B.2: Implementação Retângulo --- 
-public class Retangulo : IForma 
-{ 
-    public double Largura { get; set; } 
-    public double Altura { get; set; } 
- 
-
-public Retangulo(double largura, double altura) 
-    { 
-        Largura = largura; 
-        Altura = altura; 
-    } 
- 
-
-// Área = Base * Altura 
-    public double CalcularArea() => Largura * Altura; 
- 
-
-// Perímetro = 2 * (Base + Altura) 
-    public double CalcularPerimetro() => 2 * (Largura + Altura); 
-} 
- 
-
-// --- PARTE B.3: Implementação Círculo --- 
-public class Circulo : IForma 
-{ 
-    public double Raio { get; set; } 
- 
-
-public Circulo(double raio) 
-    { 
-        Raio = raio; 
-    } 
- 
-
-// Área = π * r² 
-    public double CalcularArea() => Math.PI * Math.Pow(Raio, 2); 
- 
-
-// Perímetro (Circunferência) = 2 * π * r 
-    public double CalcularPerimetro() => 2 * Math.PI * Raio; 
-} 
- 
-
- 
- 
-
-Partes B.4 e D - Aplicativo de Teste (GeometriaApp) 
-
-Nesta parte, integramos a Extensão 2 (Leitura de dados) e a Extensão 4 (Formatação). 
-
-C# 
-
- 
-
-class GeometriaApp 
-{ 
-    static void Main() 
-    { 
-        // 1. Criando a lista do tipo da Interface 
-        List<IForma> formas = new List<IForma>(); 
- 
-
-Console.WriteLine("=== SISTEMA DE GEOMETRIA POO ==="); 
- 
-
-// Parte D.2 & D.3: Entrada de dados e validação simples 
-        try  
-        { 
-            Console.Write("Digite a largura do retângulo: "); 
-            double larg = double.Parse(Console.ReadLine()!); 
-             
-            Console.Write("Digite a altura do retângulo: "); 
-            double alt = double.Parse(Console.ReadLine()!); 
-             
-            if (larg > 0 && alt > 0) 
-                formas.Add(new Retangulo(larg, alt)); 
- 
-
-Console.Write("\nDigite o raio do círculo: "); 
-            double raio = double.Parse(Console.ReadLine()!); 
-             
-            if (raio > 0) 
-                formas.Add(new Circulo(raio)); 
-        } 
-        catch (Exception) 
-        { 
-            Console.WriteLine("Erro: Entrada inválida. Usando valores padrão para o teste."); 
-            formas.Add(new Retangulo(10, 5)); 
-            formas.Add(new Circulo(3)); 
-        } 
- 
-
-// 3. Percorrendo a lista (Polimorfismo) 
-        Console.WriteLine("\n--- RESULTADOS DOS CÁLCULOS ---"); 
-        foreach (IForma forma in formas) 
-        { 
-            // Parte D.4: Formatação com 2 casas decimais (:F2) 
-            Console.WriteLine($"Forma: {forma.GetType().Name}"); 
-            Console.WriteLine($"Área:      {forma.CalcularArea():F2}"); 
-            Console.WriteLine($"Perímetro: {forma.CalcularPerimetro():F2}"); 
-            Console.WriteLine(new string('-', 30)); 
-        } 
- 
-
-Console.WriteLine("Pressione ENTER para fechar."); 
-        Console.ReadLine(); 
-    } 
-} 
- 
-
- 
- 
-
-PARTE C - Registro de Resultados e Explicação 
-
-1. Texto exibido no Console (Exemplo) 
-
-Plaintext 
-
- 
-
-=== SISTEMA DE GEOMETRIA POO === 
-Digite a largura do retângulo: 10 
-Digite a altura do retângulo: 5 
- 
-
-Digite o raio do círculo: 3 
- 
-
---- RESULTADOS DOS CÁLCULOS --- 
-Forma: Retangulo 
-Área:      50,00 
-Perímetro: 30,00 
------------------------------- 
-Forma: Circulo 
-Área:      28,27 
-Perímetro: 18,85 
------------------------------- 
- 
-
-2. Onde aparece a Interface e o Polimorfismo? 
-
-Interface: Aparece na declaração da lista (List<IForma>) e no laço foreach. Ela atua como um "tipo genérico" que garante que qualquer objeto ali dentro possua os métodos de cálculo, mesmo que a interface em si não saiba como calcular nada. 
-
-Polimorfismo: Ocorre na linha forma.CalcularArea(). Embora a variável forma seja do tipo IForma, o comportamento muda dinamicamente: quando o objeto é um Retangulo, ele usa a fórmula de base vezes altura; quando é um Circulo, ele usa as fórmulas trigonométricas de Math.PI. 
-
- 
- 
-
-Checklist de Validação 
-
-[x] IForma define apenas assinaturas. 
-
-[x] Retangulo e Circulo implementam todos os métodos da interface. 
-
-[x] O uso de Math.PI garante precisão nos cálculos do círculo. 
-
-[x] A lista armazena objetos de classes diferentes sob o mesmo contrato.
+# Roteiro 6 — Interfaces e Cálculos de Formas
+
+## Parte A — Configuração
+1. Criar projeto Console App.
+2. Definir nome da solução/projeto.
+3. Validar execução inicial.
+
+## Parte B — Implementação
+
+### 1) Interface `IForma`
+- `double CalcularArea();`
+- `double CalcularPerimetro();`
+
+### 2) Classe `Retangulo : IForma`
+- Propriedades: `Largura` e `Altura`.
+- Construtor para inicialização.
+- Implementar área e perímetro.
+
+### 3) Classe `Circulo : IForma`
+- Propriedade: `Raio`.
+- Construtor para inicialização.
+- Implementar área e perímetro usando `Math.PI`.
+
+### 4) Aplicação principal
+- Criar `List<IForma>`.
+- Adicionar retângulo e círculo.
+- Percorrer com `foreach` imprimindo área/perímetro.
+
+---
+
+## Parte C — Registro
+No relatório, incluir:
+- saída do console;
+- explicação de onde está a interface e onde ocorre polimorfismo.
+
+---
+
+## Parte D — Extensões
+- adicionar terceira forma;
+- ler dados do usuário;
+- validar entradas;
+- formatar saída com casas decimais.
+
+---
+
+## Exemplo de implementação
+```csharp
+using System;
+using System.Collections.Generic;
+
+public interface IForma
+{
+    double CalcularArea();
+    double CalcularPerimetro();
+}
+
+public class Retangulo : IForma
+{
+    public double Largura { get; set; }
+    public double Altura { get; set; }
+
+    public Retangulo(double largura, double altura)
+    {
+        Largura = largura;
+        Altura = altura;
+    }
+
+    public double CalcularArea() => Largura * Altura;
+    public double CalcularPerimetro() => 2 * (Largura + Altura);
+}
+
+public class Circulo : IForma
+{
+    public double Raio { get; set; }
+
+    public Circulo(double raio) => Raio = raio;
+
+    public double CalcularArea() => Math.PI * Math.Pow(Raio, 2);
+    public double CalcularPerimetro() => 2 * Math.PI * Raio;
+}
+
+var formas = new List<IForma>
+{
+    new Retangulo(10, 5),
+    new Circulo(3)
+};
+
+foreach (var forma in formas)
+{
+    Console.WriteLine($"Forma: {forma.GetType().Name}");
+    Console.WriteLine($"Área: {forma.CalcularArea():F2}");
+    Console.WriteLine($"Perímetro: {forma.CalcularPerimetro():F2}");
+    Console.WriteLine(new string('-', 30));
+}
+```
