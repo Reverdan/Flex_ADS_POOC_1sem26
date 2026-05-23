@@ -1,287 +1,84 @@
-# Roteiro 5
+# Roteiro 5 — Abstração e Polimorfismo com Animais
 
-PARTE A - CONFIGURAÇÃO DO PROJETO NO VISUAL STUDIO 
+## Parte A — Configuração do projeto
+1. Criar projeto Console App.
+2. Definir nome da solução e do projeto.
+3. Validar compilação e execução inicial.
 
-1. criar um novo projeto do tipo Console App (aplicação de console); 
+## Parte B — Implementação
 
-2. definir um nome para a solução e para o projeto (por exemplo, AnimaisPOO); 
+### 1) Classe abstrata `Animal`
+- Classe deve ser `abstract`.
+- Propriedade pública `Nome` (`string`).
+- Construtor com parâmetro `nome`.
+- Método abstrato `EmitirSom()`.
 
-3. confirmar que o projeto compila e executa (mesmo que ainda esteja com o template 
+### 2) Subclasse `Cachorro`
+- Herdar de `Animal`.
+- Repassar `nome` para `base(nome)`.
+- Implementar `EmitirSom()` com som de cachorro.
 
-padrão). 
+### 3) Subclasse `Gato`
+- Herdar de `Animal`.
+- Repassar `nome` para `base(nome)`.
+- Implementar `EmitirSom()` com som de gato.
 
-PARTE B - IMPLEMENTAÇÃO PASSO A PASSO 
+### 4) Teste no programa principal
+- Declarar variáveis do tipo `Animal` com instâncias concretas.
+- Chamar `EmitirSom()` em cada objeto.
 
-1) Criar a classe abstrata Animal 
+---
 
-Crie uma classe chamada Animal com estas características: 
+## Parte C — Registro do resultado
+No relatório, inclua:
+- saída do console;
+- explicação curta demonstrando o polimorfismo.
 
- ela deve ser abstrata; 
+---
 
- ela deve ter uma propriedade pública: 
+## Parte D — Extensões
+Escolha pelo menos uma:
+- adicionar terceiro animal;
+- usar `List<Animal>` com laço;
+- ler nomes com `Console.ReadLine()`;
+- validar entrada de nome.
 
- Nome, do tipo string; 
+---
 
- ela deve ter um construtor público que receba um string nome e atribua esse valor 
+## Exemplo de implementação
+```csharp
+using System;
+using System.Collections.Generic;
 
-à propriedade Nome; 
+public abstract class Animal
+{
+    public string Nome { get; set; }
 
- ela deve declarar um método chamado EmitirSom com estas características: 
+    protected Animal(string nome) => Nome = nome;
 
- ele deve ser abstrato; 
+    public abstract void EmitirSom();
+}
 
- ele deve retornar void; 
+public class Cachorro : Animal
+{
+    public Cachorro(string nome) : base(nome) { }
 
- ele não deve ter parâmetros. 
+    public override void EmitirSom() => Console.WriteLine($"[Cachorro] {Nome}: Au Au!");
+}
 
-Checklist do item 1 
+public class Gato : Animal
+{
+    public Gato(string nome) : base(nome) { }
 
- a classe compila mesmo sendo abstrata; 
+    public override void EmitirSom() => Console.WriteLine($"[Gato] {Nome}: Miau!");
+}
 
- o método abstrato não tem corpo; 
+var animais = new List<Animal>
+{
+    new Cachorro("Rex"),
+    new Gato("Luna")
+};
 
- o construtor inicializa a propriedade Nome. 
-
-2) Criar a subclasse concreta Cachorro 
-
-Crie uma classe Cachorro que: 
-
- herde de Animal; 
-
- tenha um construtor que receba string nome e repasse para o construtor da classe 
-
-base; 
-
- implemente EmitirSom com override, imprimindo no console uma mensagem com: 
-
- o nome do animal; 
-
- um som característico de cachorro. 
-
-Dica técnica 
-
- use interpolação de strings com $”...” para imprimir o nome com a mensagem. 
-
-3) Criar a subclasse concreta Gato 
-
-Crie uma classe Gato que: 
-
- herde de Animal; 
-
- tenha um construtor que receba string nome e repasse para a classe base; 
-
- implemente EmitirSom com override, imprimindo no console: 
-
- o nome do animal; 
-
- um som característico de gato. 
-
-4) Criar o programa de teste (classe Program e Main) 
-
-No ponto de entrada do programa: 
-
-1. declare duas variáveis do tipo Animal, mas instancie objetos concretos diferentes: 
-
- uma variável deve receber um Cachorro com um nome; 
-
- outra variável deve receber um Gato com um nome; 
-
-2. chame EmitirSom() nas duas variáveis. 
-
-O que você deve observar 
-
- mesmo com o tipo declarado como Animal, o método executado deve ser o das 
-
-subclasses (isso é o polimorfismo em ação). 
-
-PARTE C - COMPILAÇÃO, EXECUÇÃO E REGISTRO DO RESULTADO 
-
-1. compilar a solução (Build); 
-
-2. executar o programa (Run); 
-
-3. registrar no relatório: 
-
- a saída exibida no console (copie e cole como texto); 
-
- uma explicação curta de por que a saída mostra que houve polimorfismo. 
-
-PARTE D - EXTENSÕES (PARA CRIATIVIDADE E APRIMORAMENTOS) 
-
-Escolha pelo menos uma melhoria: 
-
-1. Adicionar um terceiro animal, como Vaca ou Pato, seguindo o mesmo padrão; 
-
-2. Criar uma lista de animais (List<Animal>), adicionar vários objetos e usar um laço 
-
-para chamar EmitirSom() em cada um; 
-
-3. Ler nomes do usuário com Console.ReadLine() e criar os objetos com os nomes 
-
-digitados; 
-
-4. Validar entrada (por exemplo, repetir a pergunta se o nome vier vazio). 
-
- 
-
-Essa estrutura é o exemplo clássico para entender o Polimorfismo e a Abstração. Ao definir uma classe como abstract, você está criando um "contrato": todo animal deve ter um nome e deve emitir um som, mas como esse som é emitido depende especificamente de cada espécie. 
-
-Aqui está a implementação completa seguindo o seu roteiro, incluindo a Extensão de Lista Dinâmica com entrada do usuário para tornar o teste mais interativo. 
-
- 
- 
-
-Partes A e B - Implementação das Classes 
-
-C# 
-
- 
-
-using System; 
-using System.Collections.Generic; 
- 
-
-// --- PARTE B.1: Classe Abstrata --- 
-// Relatório: 'abstract' impede que alguém crie um "Animal" genérico (new Animal()). 
-public abstract class Animal 
-{ 
-    public string Nome { get; set; } 
- 
-
-public Animal(string nome) 
-    { 
-        Nome = nome; 
-    } 
- 
-
-// Método abstrato: não tem corpo {}, apenas a assinatura. 
-    public abstract void EmitirSom(); 
-} 
- 
-
-// --- PARTE B.2: Subclasse Cachorro --- 
-public class Cachorro : Animal 
-{ 
-    // O : base(nome) repassa o parâmetro para o construtor da classe Animal 
-    public Cachorro(string nome) : base(nome) { } 
- 
-
-public override void EmitirSom() 
-    { 
-        Console.WriteLine($"[Cachorro] {Nome} diz: Au Au! 🐾"); 
-    } 
-} 
- 
-
-// --- PARTE B.3: Subclasse Gato --- 
-public class Gato : Animal 
-{ 
-    public Gato(string nome) : base(nome) { } 
- 
-
-public override void EmitirSom() 
-    { 
-        Console.WriteLine($"[Gato] {Nome} diz: Miau! 🐱"); 
-    } 
-} 
- 
-
-// --- PARTE D: Extensão (Vaca) --- 
-public class Vaca : Animal 
-{ 
-    public Vaca(string nome) : base(nome) { } 
- 
-
-public override void EmitirSom() 
-    { 
-        Console.WriteLine($"[Vaca] {Nome} diz: Muuuu! 🐄"); 
-    } 
-} 
- 
-
- 
- 
-
-Partes B.4 e D - Programa de Teste (Main) 
-
-Utilizei a Parte D (Extensões 2 e 3) para criar um loop que permite cadastrar vários animais e ouvir seus sons. 
-
-C# 
-
- 
-
-// PARTE B.4 & D.2: Criando a lista de animais 
-List<Animal> fazenda = new List<Animal>(); 
- 
-
-Console.WriteLine("=== SISTEMA DE ANIMAIS POO ==="); 
- 
-
-// D.3: Lendo nomes do usuário 
-Console.Write("Digite o nome do seu Cachorro: "); 
-string nomeCao = Console.ReadLine() ?? "Totó"; 
-fazenda.Add(new Cachorro(nomeCao)); 
- 
-
-Console.Write("Digite o nome do seu Gato: "); 
-string nomeGato = Console.ReadLine() ?? "Bichano"; 
-fazenda.Add(new Gato(nomeGato)); 
- 
-
-fazenda.Add(new Vaca("Mimosa")); // Adicionando a extensão diretamente 
- 
-
-// Executando o Polimorfismo 
-Console.WriteLine("\n--- Emitindo Sons (Polimorfismo em ação) ---"); 
- 
-
-foreach (var animal in fazenda) 
-{ 
-    // Mesmo sendo tratado como 'Animal', o C# sabe qual som tocar  
-    // baseado no objeto real (Cachorro, Gato ou Vaca). 
-    animal.EmitirSom(); 
-} 
- 
-
-Console.WriteLine("\nPressione ENTER para finalizar."); 
-Console.ReadLine(); 
- 
-
- 
- 
-
-PARTE C - Relatório e Observações 
-
-1. Exemplo de Saída no Console 
-
-Plaintext 
-
- 
-
-=== SISTEMA DE ANIMAIS POO === 
-Digite o nome do seu Cachorro: Rex 
-Digite o nome do seu Gato: Luna 
- 
-
---- Emitindo Sons (Polimorfismo em ação) --- 
-[Cachorro] Rex diz: Au Au! 🐾 
-[Gato] Luna diz: Miau! 🐱 
-[Vaca] Mimosa diz: Muuuu! 🐄 
- 
-
-2. Explicação do Polimorfismo 
-
-A saída prova que houve polimorfismo porque, dentro do laço foreach, a variável é do tipo genérico Animal. No entanto, o programa não executa um som "genérico" (que nem existe na classe abstrata), mas sim o comportamento específico definido pelo override em cada subclasse. O C# decide em tempo de execução qual método chamar baseado no tipo real do objeto que está na memória. 
-
- 
- 
-
-Checklist de Conclusão 
-
-[x] A classe Animal é abstrata e possui construtor. 
-
-[x] Cachorro e Gato herdam de Animal e usam base. 
-
-[x] O método EmitirSom usa override nas subclasses. 
-
-[x] A lista armazena diferentes tipos sob a mesma referência (Animal).
+foreach (var animal in animais)
+    animal.EmitirSom();
+```
