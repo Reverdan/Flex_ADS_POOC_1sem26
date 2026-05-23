@@ -1,3 +1,5 @@
+# Roteiro 1
+
 Etapa 1 - Primeira saída no console (top-level statements) 
 
 1. No arquivo principal (por exemplo, Program.cs), escrever uma primeira linha usando 
@@ -589,4 +591,4 @@ Null-conditional assignment: Atribuições seguras e elegantes.
  
  
 
-Checkpoint Final: Ao rodar o código, você verá Total do cliente: 150.00. Se mudar para null, verá que o programa ignora a soma e segue viagem sem travar. 
+Checkpoint Final: Ao rodar o código, você verá Total do cliente: 150.00. Se mudar para null, verá que o programa ignora a soma e segue viagem sem travar.

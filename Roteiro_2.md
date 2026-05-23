@@ -1,3 +1,5 @@
+# Roteiro 2
+
 Etapa 1 — Mensagens iniciais no console 
 
 1. Imprimir um título (por exemplo: “demonstração de condicionais e laços”). 
@@ -737,4 +739,4 @@ Robustez (TryParse): O uso do int.TryParse evita que o programa "crashe" caso o 
 
 Verificação da Extensão: * Ao digitar uma nota como "abc", o programa exibe o erro amigável em vez de fechar? 
 
-Ao digitar 'a' minúsculo no comando, ele reconhece como 'A' e executa a ação? 
+Ao digitar 'a' minúsculo no comando, ele reconhece como 'A' e executa a ação?

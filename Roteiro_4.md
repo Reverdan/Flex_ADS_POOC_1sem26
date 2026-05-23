@@ -1,3 +1,5 @@
+# Roteiro 4
+
 PASSO A PASSO DE IMPLEMENTAÇÃO 
 
 Passo 1 — Preparar o projeto 
@@ -376,4 +378,4 @@ Por que essa lógica é segura?
 
 Encapsulamento: Usamos os métodos Sacar e Depositar que já possuem as travas de segurança (não deixar saldo negativo, não aceitar valores nulos). 
 
-Atomicidade Simples: O código verifica se o saque foi possível antes de tentar o depósito. Se o saldo de A for insuficiente, o método retorna false imediatamente e nada acontece com a conta B. 
+Atomicidade Simples: O código verifica se o saque foi possível antes de tentar o depósito. Se o saldo de A for insuficiente, o método retorna false imediatamente e nada acontece com a conta B.

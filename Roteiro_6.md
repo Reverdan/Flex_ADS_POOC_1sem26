@@ -1,3 +1,5 @@
+# Roteiro 6
+
 PARTE A - CONFIGURAÇÃO DO PROJETO NO VISUAL STUDIO 
 
 1. criar um novo projeto do tipo Console App (aplicação de console); 
@@ -312,4 +314,4 @@ Checklist de Validação
 
 [x] O uso de Math.PI garante precisão nos cálculos do círculo. 
 
-[x] A lista armazena objetos de classes diferentes sob o mesmo contrato. 
+[x] A lista armazena objetos de classes diferentes sob o mesmo contrato.
